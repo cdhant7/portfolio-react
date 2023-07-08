@@ -1,4 +1,4 @@
-import './work.scss'
+import './works.scss'
 
 function Works() {
   return (
