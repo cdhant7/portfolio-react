@@ -7,6 +7,7 @@
         position: relative;
         top: 70px;
         background-color: lightsalmon;
+        scroll-behavior: smooth;
         scroll-snap-type: y mandatory;
         scrollbar-width: none;      //its only for firefox
         &::-webkit-scrollbar{

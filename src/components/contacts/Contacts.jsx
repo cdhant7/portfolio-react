@@ -2,7 +2,7 @@ import './contacts.scss';
 
 function Contacts() {
   return (
-    <div className='contact'>
+    <div className='contact' id='contact'>
       
     </div>
   )
