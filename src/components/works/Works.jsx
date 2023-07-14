@@ -1,10 +1,12 @@
-import './works.scss'
+import { useState } from "react";
+import "./works.scss";
 
-function Works() {
-  const data=[
+export default function Works() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const data = [
     {
       id: "1",
-      icon: "./assets/mobile.png",
+      icon: "assets/pexels-thought-catalog-2228569.jpg",
       title: "Web Design",
       desc:
         "Lorem Ipsum is simply dummy text of the printing and typesetting industry. ",
@@ -13,7 +15,7 @@ function Works() {
     },
     {
       id: "2",
-      icon: "./assets/globe.png",
+      icon: "assets/pexels-lil-artsy-1925535.jpg",
       title: "Mobile Application",
       desc:
         "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
@@ -22,40 +24,62 @@ function Works() {
     },
     {
       id: "3",
-      icon: "./assets/writing.png",
+      icon: "assets/pexels-ruvim-3767673.jpg",
       title: "Branding",
       desc:
         "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
       img:
         "https://i.pinimg.com/originals/a9/f6/94/a9f69465d972a004ad581f245d6ad581.jpg",
     },
+  ];
 
-  ]
+  const handleClick = (way) => {
+    way === "left"
+      ? setCurrentSlide(currentSlide > 0 ? currentSlide - 1 : 2)
+      : setCurrentSlide(currentSlide < data.length - 1 ? currentSlide + 1 : 0);
+  };
+  
   return (
-    <div className='works' id='works'>
-      <div className="slider">
-        <div className="container">
-          <div className="item">
-            <div className="left">
-              <div className="leftContainer">
-                <div className="imgContainer">
-                  <img src="assets\pexels-thought-catalog-2228569.jpg" alt="" />
+    <div className="works" id="works">
+      <div
+        className="slider"
+        style={{ transform: `translateX(-${currentSlide * 100}vw)` }}
+      >
+        {data.map((d) => (
+          <div className="container">
+            <div className="item">
+              <div className="left">
+                <div className="leftContainer">
+                  <div className="imgContainer">
+                    <img src={d.icon} alt="" />
+                  </div>
+                  <h2>{d.title}</h2>
+                  <p>{d.desc}</p>
+                  <span>Projects</span>
                 </div>
-                <h2>Title</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus numquam eaque rerum autem saepe quo perferendis mollitia ipsum commodi repellat veritatis quaerat, itaque veniam quae tempore temporibus explicabo illo cupiditate.</p>
-                <span>Projects</span>
+              </div>
+              <div className="right">
+                <img
+                  src="https://99designs-blog.imgix.net/blog/wp-content/uploads/2018/10/attachment_100040756-e1538485934255.jpeg?auto=format&q=60&fit=max&w=930"
+                  alt=""
+                />
               </div>
             </div>
-            <div className="right">
-              <img src="https://imagekit.io/blog/content/images/2021/07/Resize-in-JS.jpg" alt="" />
-            </div>
           </div>
-        </div>
+        ))}
       </div>
-      <img src="assets\pexels-martin-de-arriba-11506752.jpg" className='arrow left' alt="" />
-      <img src="assets\pexels-martin-de-arriba-11506752.jpg" className='arrow right' alt="" />
+      <img
+        src="assets\pexels-martin-de-arriba-11506752.jpg"
+        className="arrow left"
+        alt=""
+        onClick={() => handleClick("left")}
+      />
+      <img
+        src="assets\pexels-martin-de-arriba-11506752.jpg"
+        className="arrow right"
+        alt=""
+        onClick={() => handleClick()}
+      />
     </div>
-  )
+  );
 }
-
-export default Works
